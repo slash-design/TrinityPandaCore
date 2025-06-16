@@ -2077,7 +2077,7 @@ void LFGMgr::TeleportPlayer(Player* player, bool out, bool fromOpcode /*= false*
 {
     LFGDungeonData const* dungeon = NULL;
     Group* group = player->GetGroup();
-    if (fromOpcode && group && group->GetMembersCount() == 1)
+    if (fromOpcode && group && group->GetMembersCount() == 0)
     {
         group->RemoveMember(player->GetGUID(), GROUP_REMOVEMETHOD_LEAVE);
         return;

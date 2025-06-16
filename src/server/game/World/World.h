@@ -21,8 +21,8 @@
 /// @{
 /// \file
 
-#ifndef SF_WORLD_H
-#define SF_WORLD_H
+#ifndef WORLD_H
+#define WORLD_H
 
 #include "Common.h"
 #include "Timer.h"
@@ -33,7 +33,6 @@
 #include "Callback.h"
 #include "ByteBuffer.h"
 #include "Transaction.h"
-
 #include <thread>
 #include <map>
 #include <set>
@@ -172,6 +171,7 @@ enum WorldBoolConfigs
     CONFIG_LFG_OVERRIDE_ROLES_REQUIRED,
     CONFIG_LFG_MULTIQUEUE_ENABLED,
     CONFIG_LFG_KEEP_QUEUES_IN_DUNGEON,
+    CONFIG_LFG_SOLO,
     CONFIG_DBC_ENFORCE_ITEM_ATTRIBUTES,
     CONFIG_PRESERVE_CUSTOM_CHANNELS,
     CONFIG_PDUMP_NO_PATHS,
