@@ -1118,6 +1118,13 @@ DungeonFinder.OptionsMask = 1
 LFGSolo.Enabled = 0
 
 #
+#    LFGSoloDPS.Member
+#        Description: Number of DPS members for low populated servers
+#        Default:     1  - (Member)
+
+LFGSoloDPS.Member = 1
+
+#
 #   DBC.EnforceItemAttributes
 #        Description: Disallow overriding item attributes stored in DBC files with values from the
 #                     database.

@@ -495,7 +495,7 @@ QueueManager::QueueManager()
         {
             tank = 0;
             heal = 0;
-            dps = 1;
+            dps = sWorld->getIntConfig(CONFIG_LFG_SOLO_DPS);
         }
 
         m_queues.emplace(dungeon->ID, DungeonQueue{ this, dungeon->ID, tank, heal, dps, raid });
