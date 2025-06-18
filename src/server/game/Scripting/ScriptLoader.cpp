@@ -96,6 +96,11 @@ void AddSC_isle_of_conquest();
 void AddSC_silvershard_mines();
 void AddSC_temple_of_kotmogu();
 
+// BattlePay
+void AddSC_Boost_Profession();
+void AddSC_wow_token();
+void AddSC_time_is_money();
+
 #ifdef SCRIPTS
 //world
 void AddSC_areatrigger_scripts();
@@ -2110,18 +2115,21 @@ void AddBattlegroundScripts()
     AddSC_temple_of_kotmogu();
 }
 
+void AddBattlePayScripts()
+{
+    AddSC_Boost_Profession();
+    AddSC_time_is_money();
+    AddSC_wow_token();
+}
+
 #ifdef SCRIPTS
 /* This is where custom scripts' loading functions should be declared. */
 
 #endif
 void AddSC_npc_teleport();
 void AddSC_protected_zone();
-void AddSC_wow_token();
-void AddSC_custom_reward();
-void AddSC_Boost_Profession();
 void AddSC_Custom_Items();
 void AddSC_solocraft();
-
 
 void AddCustomScripts()
 {
@@ -2129,9 +2137,6 @@ void AddCustomScripts()
     /* This is where custom scripts should be added. */
 AddSC_npc_teleport();
 AddSC_protected_zone();
-AddSC_wow_token();
-AddSC_custom_reward();
-AddSC_Boost_Profession();
 AddSC_Custom_Items();
 AddSC_solocraft();
 
@@ -2146,6 +2151,7 @@ void AddScripts()
     AddCommandScripts();
     AddBattlegroundScripts();
 #ifdef SCRIPTS
+    AddBattlePayScripts();
     AddWorldScripts();
     AddEasternKingdomsScripts();
     AddKalimdorScripts();
