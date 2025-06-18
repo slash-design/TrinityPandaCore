@@ -1,4 +1,19 @@
-= TrinityCore -- Thanks/credits file =
+# DestinyCore — Thanks & Credits
+
+**DestinyCore** © 2025  
+<a href="https://github.com/slash-design/DestinyCore">https://github.com/slash-design/DestinyCore</a>
+
+---
+
+## Based on
+
+- **Project SkyFire** © 2011–2016 <http://www.projectskyfire.org/>  
+- **TrinityCore**    © 2008–2016 <https://www.trinitycore.org/>  
+- **MaNGOS**         © 2005–2016 <https://getmangos.com/>
+
+---
+
+## Original Thanks from TrinityCore
 
 TrinityCore is a derivation/rewrite of MaNGOS, which was originally written
 by Team Python and the WoW Daemon Team. Many people further helped Trinity Core

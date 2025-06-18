@@ -1,5 +1,5 @@
 /*
- * This file is part of the Torghast Project. See AUTHORS file for Copyright information
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -90,7 +90,7 @@ char const* GitRevision::GetFullDatabase()
 
 char const* GitRevision::GetFullVersion()
 {
-  return "ZgNCore rev. " VER_PRODUCTVERSION_STR
+  return "DestinyCore rev. " VER_PRODUCTVERSION_STR
     " (" TRINITY_PLATFORM_STR ", " _BUILD_DIRECTIVE ", " TRINITY_LINKAGE_TYPE_STR ")";
 }
 

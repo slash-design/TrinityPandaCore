@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -111,7 +109,7 @@ void utf8print(void* /*arg*/, const char* str)
 
 void commandFinished(void*, bool /*success*/)
 {
-    printf("ZgNCore> ");
+    printf("DC> ");
     fflush(stdout);
 }
 
@@ -145,7 +143,7 @@ void CliRunnable::run()
 
     // print this here the first time
     // later it will be printed after command queue updates
-    printf("ZgNCore>");
+    printf("DC>");
 
     ///- As long as the World is running (no World::m_stopEvent), get the command line and handle it
     while (!World::IsStopped())
@@ -158,7 +156,7 @@ void CliRunnable::run()
         char commandbuf[256];
         command_str = fgets(commandbuf, sizeof(commandbuf), stdin);
 #else
-        command_str = readline("ZgNCore>");
+        command_str = readline("DC>");
         rl_bind_key('\t', rl_complete);
 #endif
 
@@ -174,7 +172,7 @@ void CliRunnable::run()
             if (!*command_str)
             {
 #if PLATFORM == PLATFORM_WINDOWS
-                printf("ZgNCore>");
+                printf("DC>");
 #else
                 free(command_str);
 #endif
@@ -185,7 +183,7 @@ void CliRunnable::run()
             if (!consoleToUtf8(command_str, command))         // convert from console encoding to utf8
             {
 #if PLATFORM == PLATFORM_WINDOWS
-                printf("ZgNCore>");
+                printf("DC>");
 #else
                 free(command_str);
 #endif

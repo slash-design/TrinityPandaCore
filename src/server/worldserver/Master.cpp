@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -33,7 +31,7 @@
 #include "Configuration/Config.h"
 #include "Database/DatabaseEnv.h"
 #include "Database/DatabaseWorkerPool.h"
-
+#include "Banner.h"
 #include "CliRunnable.h"
 #include "Log.h"
 #include "Master.h"
@@ -167,14 +165,18 @@ int Master::Run()
     BigNumber seed1;
     seed1.SetRand(16 * 8);
 
-    TC_LOG_INFO("server.worldserver", "%s (worldserver-daemon)", GitRevision::GetFullVersion());
-    TC_LOG_INFO("server.worldserver", "<Ctrl-C> to stop.\n");
-    TC_LOG_INFO("server.worldserver", "╔═══╗╔═══╗╔╗─╔╗───╔══╗╔══╗╔═══╗╔═══╗");
-    TC_LOG_INFO("server.worldserver", "╚═╗─║║╔══╝║╚═╝║───║╔═╝║╔╗║║╔═╗║║╔══╝");
-    TC_LOG_INFO("server.worldserver", "─╔╝╔╝║║╔═╗║╔╗─║───║║──║║║║║╚═╝║║╚══╗");
-    TC_LOG_INFO("server.worldserver", "╔╝╔╝─║║╚╗║║║╚╗║───║║──║║║║║╔╗╔╝║╔══╝");
-    TC_LOG_INFO("server.worldserver", "║─╚═╗║╚═╝║║║─║║───║╚═╗║╚╝║║║║║─║╚══╗");
-    TC_LOG_INFO("server.worldserver", "╚═══╝╚═══╝╚╝─╚╝───╚══╝╚══╝╚╝╚╝─╚═══╝\n");
+    Destiny::Banner::Show("worldserver-daemon",
+        [](char const* text)
+        {
+            TC_LOG_INFO("server.worldserver", "%s", text);
+        },
+        []()
+        {
+            TC_LOG_INFO("server.worldserver", "Using configuration file %s.", sConfigMgr->GetFilename().c_str());
+            TC_LOG_INFO("server.worldserver", "Using SSL version: %s (library: %s)", OPENSSL_VERSION_TEXT, OpenSSL_version(OPENSSL_VERSION));
+            TC_LOG_INFO("server.worldserver", "Using Boost version: %i.%i.%i", BOOST_VERSION / 100000, BOOST_VERSION / 100 % 1000, BOOST_VERSION % 100);
+        }
+        );
 
     /// worldserver PID file creation
     std::string pidFile = sConfigMgr->GetStringDefault("PidFile", "");

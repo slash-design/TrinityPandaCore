@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -31,7 +29,7 @@
 #include <ace/Sig_Handler.h>
 #include <openssl/opensslv.h>
 #include <openssl/crypto.h>
-
+#include "Banner.h"
 #include "Common.h"
 #include "Database/DatabaseEnv.h"
 #include "Configuration/Config.h"
@@ -128,18 +126,18 @@ extern int main(int argc, char** argv)
         return 1;
     }
 
-    TC_LOG_INFO("server.authserver", "%s (authserver)", GitRevision::GetFullVersion());
-    TC_LOG_INFO("server.authserver", "<Ctrl-C> to stop.\n");
-    TC_LOG_INFO("server.authserver", "╔═══╗╔═══╗╔╗─╔╗───╔══╗╔══╗╔═══╗╔═══╗");
-    TC_LOG_INFO("server.authserver", "╚═╗─║║╔══╝║╚═╝║───║╔═╝║╔╗║║╔═╗║║╔══╝");
-    TC_LOG_INFO("server.authserver", "─╔╝╔╝║║╔═╗║╔╗─║───║║──║║║║║╚═╝║║╚══╗");
-    TC_LOG_INFO("server.authserver", "╔╝╔╝─║║╚╗║║║╚╗║───║║──║║║║║╔╗╔╝║╔══╝");
-    TC_LOG_INFO("server.authserver", "║─╚═╗║╚═╝║║║─║║───║╚═╗║╚╝║║║║║─║╚══╗");
-    TC_LOG_INFO("server.authserver", "╚═══╝╚═══╝╚╝─╚╝───╚══╝╚══╝╚╝╚╝─╚═══╝\n");
-
-    TC_LOG_INFO("server.authserver", "Using configuration file %s.", configFile);
-
-    TC_LOG_WARN("server.authserver", "%s (Library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
+    Destiny::Banner::Show("authserver",
+        [](char const* text)
+        {
+            TC_LOG_INFO("server.authserver", "%s", text);
+        },
+        []()
+        {
+            TC_LOG_INFO("server.authserver", "Using configuration file %s.", sConfigMgr->GetFilename().c_str());
+            TC_LOG_INFO("server.authserver", "Using SSL version: %s (library: %s)", OPENSSL_VERSION_TEXT, OpenSSL_version(OPENSSL_VERSION));
+            TC_LOG_INFO("server.authserver", "Using Boost version: %i.%i.%i", BOOST_VERSION / 100000, BOOST_VERSION / 100 % 1000, BOOST_VERSION % 100);
+        }
+);
 
 #if defined (ACE_HAS_EVENT_POLL) || defined (ACE_HAS_DEV_POLL)
     ACE_Reactor::instance(new ACE_Reactor(new ACE_Dev_Poll_Reactor(ACE::max_handles(), 1), 1), true);
