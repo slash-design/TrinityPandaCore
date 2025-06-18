@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -2122,6 +2120,7 @@ void AddSC_wow_token();
 void AddSC_custom_reward();
 void AddSC_Boost_Profession();
 void AddSC_Custom_Items();
+void AddSC_solocraft();
 
 
 void AddCustomScripts()
@@ -2134,6 +2133,7 @@ AddSC_wow_token();
 AddSC_custom_reward();
 AddSC_Boost_Profession();
 AddSC_Custom_Items();
+AddSC_solocraft();
 
 #endif
     AddSC_Anticheat();
