@@ -15,22 +15,30 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DESTINYCORE_STRING_FORMAT_H
-#define DESTINYCORE_STRING_FORMAT_H
+#ifndef STRING_FORMAT_H
+#define STRING_FORMAT_H
 
 #include "fmt/printf.h"
 
 namespace Destiny
 {
-    /// Default TC string format function.
+    /// Default DC string format function.
     template<typename Format, typename... Args>
-    std::string StringFormat(Format&& fmt, Args&&... args)
+    inline std::string StringFormat(Format&& fmt, Args&&... args)
     {
-        return fmt::sprintf(std::forward<Format>(fmt), std::forward<Args>(args)...);
+        try
+        {
+            return fmt::sprintf(std::forward<Format>(fmt), std::forward<Args>(args)...);
+        }
+        catch (const fmt::format_error& formatError)
+        {
+            std::string error = "An error occurred formatting string \"" + std::string(fmt) + "\" : " + std::string(formatError.what());
+            return error;
+        }
     }
 
     /// Returns true if the given char pointer is null.
-    inline bool IsFormatEmptyOrNull(const char* fmt)
+    inline bool IsFormatEmptyOrNull(char const* fmt)
     {
         return fmt == nullptr;
     }
