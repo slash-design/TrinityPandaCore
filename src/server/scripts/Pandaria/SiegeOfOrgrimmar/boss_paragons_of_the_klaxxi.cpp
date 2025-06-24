@@ -3258,7 +3258,7 @@ class spell_soo_aim : public SpellScript
     }
 };
 
-class AimPredicate : public TC_UNARY_FUNCTION<Creature*, bool>
+class AimPredicate
 {
     public:
         AimPredicate(Creature* const caster) : _caster(caster) { }
@@ -3677,7 +3677,7 @@ class spell_paragon_fiery_edge_periodic : public AuraScript
     }
 };
 
-class FieryEdgePredicate : public std::binary_function<Unit*, Unit*, bool>
+class FieryEdgePredicate
 {
     public:
         FieryEdgePredicate(Unit* const caster, Unit* const target) : _caster(caster), _target(target) { }
