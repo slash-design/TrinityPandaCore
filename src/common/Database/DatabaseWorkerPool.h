@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -17,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _DATABASEWORKERPOOL_H
-#define _DATABASEWORKERPOOL_H
+#ifndef DATABASEWORKERPOOL_H
+#define DATABASEWORKERPOOL_H
 
 #include <ace/Thread_Mutex.h>
 
@@ -66,6 +64,8 @@ class DatabaseWorkerPool
             WPFatal(mysql_thread_safe(), "Used MySQL library isn't thread-safe.");
             WPFatal(mysql_get_client_version() >= MIN_MYSQL_CLIENT_VERSION, "TrinityCore does not support MySQL versions below 5.1");
         }
+
+        using ConnectionType = T;
 
         ~DatabaseWorkerPool()
         {
@@ -509,6 +509,17 @@ class DatabaseWorkerPool
             return next;
         }
 
+        T* GetConnection();
+
+        bool ExecuteMultiSQL(const std::string& sql)
+        {
+            T* conn = GetConnection();
+            if (!conn)
+                return false;
+
+            return conn->ExecuteMultiSQL(sql);
+        }
+
     private:
         unsigned long EscapeString(char *to, const char *from, unsigned long length)
         {
@@ -586,6 +597,7 @@ class DatabaseWorkerPool
         std::vector<T*>                 _connections;
         std::vector<DatabaseWorker*>    _workers;
         MySQLConnectionInfo             _connectionInfo;
+        std::vector<std::unique_ptr<T>> connections;
 };
 
 #endif

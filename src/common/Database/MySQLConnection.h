@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -23,8 +21,8 @@
 #include "Transaction.h"
 #include "Util.h"
 
-#ifndef _MYSQLCONNECTION_H
-#define _MYSQLCONNECTION_H
+#ifndef MYSQLCONNECTION_H
+#define MYSQLCONNECTION_H
 
 class DatabaseWorker;
 class PreparedStatement;
@@ -81,6 +79,7 @@ class MySQLConnection
     public:
         bool Execute(const char* sql);
         bool Execute(PreparedStatement* stmt);
+        bool ExecuteMultiSQL(const std::string& sql);
         ResultSet* Query(const char* sql);
         PreparedResultSet* Query(PreparedStatement* stmt);
         bool _Query(const char *sql, MYSQL_RES **pResult, MYSQL_FIELD **pFields, uint64* pRowCount, uint32* pFieldCount);

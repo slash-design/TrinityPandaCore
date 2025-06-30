@@ -15,31 +15,21 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/// \addtogroup Trinityd
-/// @{
-/// \file
+#pragma once
 
-#ifndef MASTER_H
-#define MASTER_H
+#include <string>
+#include <vector>
 
-#include "Common.h"
-
-/// Start the server
-class Master
+class SqlUpdater
 {
-    public:
-        int Run();
-        bool ApplySqlUpdates();
+public:
+    explicit SqlUpdater(const std::string& sqlFolderPath);
 
-    private:
-        bool _StartDB();
-        void _StopDB();        
+    std::vector<std::string> GetSqlFiles() const;
+    bool LoadSqlFile(const std::string& filePath, std::vector<std::string>& statements) const;
 
-        void ClearOnlineAccounts();
+    const std::string& GetPath() const { return _sqlFolderPath; }
+
+private:
+    std::string _sqlFolderPath;
 };
-
-#define sMaster ACE_Singleton<Master, ACE_Null_Mutex>::instance()
-
-#endif
-
-/// @}

@@ -1,5 +1,5 @@
 ###############################################
-#   Trinity Auth Server configuration file    #
+#  DestinyCore AuthServer configuration file  #
 ###############################################
 [authserver]
 
@@ -9,6 +9,7 @@
 #    EXAMPLE CONFIG
 #    AUTH SERVER SETTINGS
 #    MYSQL SETTINGS
+# 	 SQL UPDATE SETTINGS
 #    LOGGING SYSTEM SETTINGS
 #
 ###################################################################################################
@@ -146,6 +147,29 @@ LoginDatabaseInfo = "127.0.0.1;3306;trinity;trinity;auth"
 #        Default:     1
 
 LoginDatabase.WorkerThreads = 1
+
+#
+###################################################################################################
+
+###################################################################################################
+# SQL UPDATE SETTINGS
+#
+#    Description: This option defines the path where SQL updates for the auth (login) database
+#                 are located. The server will automatically check this folder on startup and 
+#                 apply any pending updates that have not yet been applied to the database.
+#
+#    Note:        Only .sql files in the specified folder will be processed.
+#                 Applied updates are tracked in the database to avoid duplicates.
+#
+#    Example:     SQL.AuthUpdatePath = "./sql/updates/auth"
+#
+#    Default:     ""  - (Disabled)
+#
+#    IMPORTANT:   Please adjust this path according to your DestinyCore directory structure!
+#                 It can be an absolute path or a relative path relative to the server binary.
+#
+
+SQL.AuthUpdatePath = "sql/updates/auth"
 
 #
 ###################################################################################################

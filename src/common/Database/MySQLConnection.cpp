@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -16,7 +14,6 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 
 #include "Common.h"
 
@@ -212,6 +209,37 @@ bool MySQLConnection::Execute(PreparedStatement* stmt)
         m_mStmt->ClearParameters();
         return true;
     }
+}
+
+bool MySQLConnection::ExecuteMultiSQL(const std::string& sql)
+{
+    if (!m_Mysql)
+        return false;
+
+    // Enable multi-statements
+    if (mysql_set_server_option(m_Mysql, MYSQL_OPTION_MULTI_STATEMENTS_ON)) {
+        TC_LOG_ERROR("MySQL", "Could not enable multi statements: {}", mysql_error(m_Mysql));
+        return false;
+    }
+
+    // Execute SQL statements
+    if (mysql_real_query(m_Mysql, sql.c_str(), sql.length())) {
+        TC_LOG_ERROR("MySQL", "SQL query failed: {}", mysql_error(m_Mysql));
+        mysql_set_server_option(m_Mysql, MYSQL_OPTION_MULTI_STATEMENTS_OFF);
+        return false;
+    }
+
+    // Retrieve and free all result sets to keep the connection clean
+    do {
+        MYSQL_RES* result = mysql_store_result(m_Mysql);
+        if (result)
+            mysql_free_result(result);
+    } while (!mysql_next_result(m_Mysql));
+
+    // Disable multi-statements again
+    mysql_set_server_option(m_Mysql, MYSQL_OPTION_MULTI_STATEMENTS_OFF);
+
+    return true;
 }
 
 bool MySQLConnection::_Query(PreparedStatement* stmt, MYSQL_RES **pResult, uint64* pRowCount, uint32* pFieldCount)

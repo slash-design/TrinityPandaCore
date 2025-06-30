@@ -31,6 +31,7 @@
 #include "Configuration/Config.h"
 #include "Database/DatabaseEnv.h"
 #include "Database/DatabaseWorkerPool.h"
+#include "Database/Updater/DatabaseUpdater.h"
 #include "Banner.h"
 #include "CliRunnable.h"
 #include "Log.h"
@@ -196,6 +197,16 @@ int Master::Run()
     ///- Start the databases
     if (!_StartDB())
         return 1;
+
+    TC_LOG_INFO("sql.updater", "Starting to apply SQL updates...");
+
+    if (!sMaster->ApplySqlUpdates())
+    {
+        TC_LOG_ERROR("sql.updater", "Applying SQL updates failed, shutting down.");
+        return 1;
+    }
+
+    TC_LOG_INFO("sql.updater", "All SQL updates applied successfully.");
 
     // set server offline (not connectable)
     LoginDatabase.DirectPExecute("UPDATE realmlist SET flag = (flag & ~%u) | %u WHERE id = '%d'", REALM_FLAG_OFFLINE, REALM_FLAG_INVALID, realmID);
@@ -544,4 +555,12 @@ void Master::ClearOnlineAccounts()
 
     // Battleground instance ids reset at server restart
     CharacterDatabase.DirectExecute("UPDATE character_battleground_data SET instanceId = 0");
+}
+
+bool Master::ApplySqlUpdates()
+{
+    bool allSuccess = true;
+    allSuccess &= ApplyDatabaseUpdates(WorldDatabase, "world", "SQL.WorldUpdatePath");
+    allSuccess &= ApplyDatabaseUpdates(CharacterDatabase, "characters", "SQL.CharacterUpdatePath");
+    return allSuccess;
 }

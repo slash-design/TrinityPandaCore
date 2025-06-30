@@ -1,5 +1,5 @@
 ################################################
-#   Trinity World Server configuration file    #
+#  DestinyCore WorldServer configuration file  #
 ################################################
 [worldserver]
 
@@ -8,6 +8,7 @@
 #
 #    EXAMPLE CONFIG
 #    CONNECTIONS AND DIRECTORIES
+# 	 SQL UPDATE SETTINGS
 #    PERFORMANCE SETTINGS
 #    SERVER LOGGING
 #    SERVER SETTINGS
@@ -149,6 +150,38 @@ WorldServerPort = 8085
 #        Default:     "0.0.0.0" - (Bind to all IPs on the system)
 
 BindIP = "0.0.0.0"
+
+#
+###################################################################################################
+
+###################################################################################################
+# SQL UPDATE SETTINGS
+#
+#    Description: This option defines the path where SQL updates for the databases are located.
+#                 The server will automatically check this folder on startup and apply any
+#                 pending updates that have not yet been applied to the database.
+#
+#    Note:        Only .sql files in the specified folder will be processed.
+#                 Applied updates are tracked in the database to avoid duplicates.
+#
+#    Example:     SQL.WorldUpdatePath = "./sql/updates/world"
+#
+#    Default:     ""  - (Disabled)
+#
+#    IMPORTANT:   Please adjust this path according to your DestinyCore directory structure!
+#                 It can be an absolute path or a relative path relative to the server binary.
+#
+
+SQL.WorldUpdatePath = "/sql/updates/world"
+
+#    Description: SQL update path for the characters database.
+#
+#    Example:     SQL.CharacterUpdatePath = "./sql/updates/characters"
+#
+#    Default:     ""  - (Disabled)
+#
+
+SQL.CharacterUpdatePath = "/sql/updates/characters"
 
 #
 ###################################################################################################

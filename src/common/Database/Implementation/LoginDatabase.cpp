@@ -147,4 +147,8 @@ void LoginDatabaseConnection::DoPrepareStatements()
 	PrepareStatement(LOGIN_UPD_BATTLEPAY_DECREMENT_COINS, "UPDATE account_data SET dp = dp - ? WHERE id = ?;", CONNECTION_SYNCH);
 	
     PrepareStatement(LOGIN_INS_CURRENCY_TRANSACTIONS, "INSERT INTO `currency_transactions` (`guid`, `unix_time`, `operation`, `param`, `attachments`, `amount_before`, `amount_after`, `realmid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", CONNECTION_ASYNC);
+
+    // DatabaseUpdater
+    PrepareStatement(LOGIN_SEL_APPLIED_UPDATE, "SELECT 1 FROM applied_updates WHERE name = ? LIMIT 1", CONNECTION_SYNCH);
+    PrepareStatement(LOGIN_INS_APPLIED_UPDATE, "INSERT INTO applied_updates(name, timestamp) VALUES(? , NOW())", CONNECTION_ASYNC);
 }

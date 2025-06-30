@@ -15,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _LOGINDATABASE_H
-#define _LOGINDATABASE_H
+#ifndef LOGINDATABASE_H
+#define LOGINDATABASE_H
 
 #include "DatabaseWorkerPool.h"
 #include "MySQLConnection.h"
@@ -153,6 +153,9 @@ enum LoginDatabaseStatements
 	LOGIN_UPD_BATTLEPAY_DECREMENT_COINS,
 
     LOGIN_INS_CURRENCY_TRANSACTIONS,
+
+    LOGIN_SEL_APPLIED_UPDATE,
+    LOGIN_INS_APPLIED_UPDATE,
 
     MAX_LOGINDATABASE_STATEMENTS
 };

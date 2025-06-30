@@ -32,6 +32,7 @@
 #include "Banner.h"
 #include "Common.h"
 #include "Database/DatabaseEnv.h"
+#include "Database/Updater/DatabaseUpdater.h"
 #include "Configuration/Config.h"
 #include "Log.h"
 #include "GitRevision.h"
@@ -68,6 +69,7 @@ void AppenderDB::_write(LogMessage const& message)
 
 bool StartDB();
 void StopDB();
+bool ApplySqlUpdates();
 
 bool stopEvent = false;                                     // Setting it to true stops the server
 
@@ -163,6 +165,16 @@ extern int main(int argc, char** argv)
     // Initialize the database connection
     if (!StartDB())
         return 1;
+
+    TC_LOG_INFO("sql.updater", "Starting to apply SQL updates...");
+
+    if (!ApplySqlUpdates())
+    {
+        TC_LOG_ERROR("sql.updater", "Applying SQL updates failed, shutting down.");
+        return 1;
+    }
+
+    TC_LOG_INFO("sql.updater", "All SQL updates applied successfully.");
 
     // Get the list of realms for the server
     sRealmList->Initialize(sConfigMgr->GetIntDefault("RealmsStateUpdateDelay", 20));
@@ -336,4 +348,10 @@ void StopDB()
 {
     LoginDatabase.Close();
     MySQL::Library_End();
+}
+
+/// Apply SQL updates
+bool ApplySqlUpdates()
+{
+    return ApplyDatabaseUpdates(LoginDatabase, "auth", "SQL.AuthUpdatePath");
 }

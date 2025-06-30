@@ -20,7 +20,11 @@ CollectSourceFiles(
 # and to handle crash logs on windows
 list(APPEND PRIVATE_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/Debugging/Errors.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/Debugging/Errors.h)
+  ${CMAKE_CURRENT_SOURCE_DIR}/Debugging/Errors.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/database/Updater/SQLUpdater.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/database/Updater/SQLUpdater.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/database/Updater/DatabaseUpdater.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/database/Updater/DatabaseUpdater.h)
 
 if (USE_COREPCH)
   set(PRIVATE_PCH_HEADER PrecompiledHeaders/commonPCH.h)

@@ -81,7 +81,7 @@ CREATE TABLE `account` (
 LOCK TABLES `account` WRITE;
 
 insert  into `account`(`id`,`username`,`sha_pass_hash`,`sessionkey`,`v`,`s`,`token_key`,`email`,`reg_mail`,`joindate`,`last_ip`,`failed_logins`,`locked`,`last_login`,`online`,`expansion`,`mutetime`,`mutereason`,`muteby`,`locale`,`os`,`recruiter`,`isengard_member_id`,`rank`,`staff_id`,`vp`,`dp`,`isactive`,`activation`,`invited_by`,`inv_friend_acc`,`rewarded`,`flags`,`gmlevel`,`active_realm_id`,`online_mute_timer`,`active_mute_id`,`isengard_verified`,`cash`,`project_is_free`,`project_is_temp`,`project_unban_count`,`project_antierror`,`project_attached`,`project_passchange`,`project_vote_time`,`project_hwid`,`project_member_id`,`project_shortname`,`project_verified`,`isengard_hwid`) values 
-(2,'TEST','3D0D99423E31FCC67A6745EC89D70D700344BC76','6F35BF5FA90575528995940D50D7A963702C46AFA43A737C40FDF1869F669759C3A7571041559ACE','65F62E0C82E40660D3B21A6EBBE5F44683581572890653A44BD7BD8C2E33C0CF','E569FEED1C72382DFC3D28A8B4D8620B339A5E9DCC1BC5B7FBEE8DD579429BB9','','','','2021-12-04 17:17:35','192.168.178.96',0,0,'2025-06-16 10:42:39',0,4,0,'','',3,'Win',0,0,0,0,0,0,NULL,NULL,'','',0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(2,'TEST','3D0D99423E31FCC67A6745EC89D70D700344BC76','4ECD9E710BA0EE5F8611ABC252EC8533CBACB9D8E6B6E645C4B6F030F5908050D3169D876BEFDFD5','65F62E0C82E40660D3B21A6EBBE5F44683581572890653A44BD7BD8C2E33C0CF','E569FEED1C72382DFC3D28A8B4D8620B339A5E9DCC1BC5B7FBEE8DD579429BB9','','','','2021-12-04 17:17:35','192.168.178.25',0,0,'2025-06-24 21:52:59',0,4,0,'','',3,'Win',0,0,0,0,0,0,NULL,NULL,'','',0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (3,'TEST2','4EBB48A1FCFA0F4B846B039CE23D2F1412B80E90','','','','','','','2021-12-01 20:06:54','',0,0,'0000-00-00 00:00:00',0,4,0,'','',0,'',0,0,0,0,0,0,NULL,NULL,'','',0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (4,'TEST3','BF0F312A51ED09706A0476F44E7F2FC6B3131FC3','','','','','','','2021-11-28 13:58:28','',0,0,'0000-00-00 00:00:00',0,3,0,'','',0,'',0,0,0,0,0,0,NULL,NULL,'','',0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (5,'TEST10','BF6CB4C761172FD52EB4AEFD9505D2631DE0E905','','','','','','','2022-02-16 15:19:57','127.0.0.1',0,0,'0000-00-00 00:00:00',0,4,0,'','',0,'',0,0,0,0,0,0,NULL,NULL,'','',0,0,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
@@ -453,6 +453,22 @@ insert  into `addons`(`name`,`crc`) values
 ('Blizzard_TradeSkillUI',1276933997),
 ('Blizzard_TrainerUI',1276933997),
 ('Blizzard_VoidStorageUI',1276933997);
+
+UNLOCK TABLES;
+
+/*Table structure for table `applied_updates` */
+
+DROP TABLE IF EXISTS `applied_updates`;
+
+CREATE TABLE `applied_updates` (
+  `name` varchar(255) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `applied_updates` */
+
+LOCK TABLES `applied_updates` WRITE;
 
 UNLOCK TABLES;
 
@@ -25010,7 +25026,7 @@ CREATE TABLE `realm_diff_stats` (
 LOCK TABLES `realm_diff_stats` WRITE;
 
 insert  into `realm_diff_stats`(`realm_id`,`diff`,`min`,`max`,`unixtime`) values 
-(1,29,2,828,1750063375),
+(1,29,1,1756,1750794574),
 (2,25,1,140,1636674093);
 
 UNLOCK TABLES;
@@ -25103,7 +25119,7 @@ CREATE TABLE `realmlist` (
 LOCK TABLES `realmlist` WRITE;
 
 insert  into `realmlist`(`id`,`name`,`isengard_shortname`,`address`,`port`,`icon`,`color`,`timezone`,`allowedSecurityLevel`,`population`,`gamebuild`,`flag`,`project_hidden`,`project_enabled`,`project_dbname`,`project_dbworld`,`project_dbarchive`,`project_rates_min`,`project_rates_max`,`project_transfer_level_max`,`project_transfer_items`,`project_transfer_skills_spells`,`project_transfer_glyphs`,`project_transfer_achievements`,`project_server_same`,`project_server_settings`,`project_server_remote_path`,`project_accounts_detach`,`project_setskills_value_max`,`project_chat_enabled`,`project_statistics_enabled`,`project_shortname`) values 
-(1,'Trinity','Trinity','192.168.178.25',8085,0,2,1,0,0,18414,8,0,1,'','','',10,15,80,'IGNORE','IGNORE','IGNORE','IGNORE',0,'','',1,0,0,0,'Trinity');
+(1,'Trinity','Trinity','192.168.178.25',8085,0,2,1,0,0,18414,9,0,1,'','','',10,15,80,'IGNORE','IGNORE','IGNORE','IGNORE',0,'','',1,0,0,0,'Trinity');
 
 UNLOCK TABLES;
 
@@ -25205,7 +25221,13 @@ insert  into `uptime`(`realmid`,`starttime`,`uptime`,`maxplayers`,`revision`) va
 (1,1639565708,0,0,'SkyFire 5.x.xRev: 0 Release Hash: Archive (Win64, little-endian)'),
 (1,1645013983,0,0,'TrinityCore rev. Archived 1970-01-01 00:00:00 +0000 ( branch) (Win64, , Static)'),
 (1,1645014150,0,0,'TrinityCore rev. Archived 1970-01-01 00:00:00 +0000 ( branch) (Win64, , Static)'),
-(1,1750063185,0,0,'ZgNCore rev. Archived 1970-01-01 00:00:00 +0000 ( branch) (Win64, RelWithDebInfo, Static)');
+(1,1750063185,0,0,'ZgNCore rev. Archived 1970-01-01 00:00:00 +0000 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750698238,0,0,'DestinyCore rev. world_db-30acc71330 2025-06-23 16:41:30 +0200 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750792366,0,0,'DestinyCore rev. world_db-3c10d2bf2d 2025-06-24 20:24:07 +0200 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750794389,0,0,'DestinyCore rev. world_db-3c10d2bf2d-dirty 2025-06-24 20:24:07 +0200 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750794657,0,0,'DestinyCore rev. world_db-3c10d2bf2d-dirty 2025-06-24 20:24:07 +0200 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750794759,0,0,'DestinyCore rev. world_db-3c10d2bf2d 2025-06-24 20:24:07 +0200 ( branch) (Win64, RelWithDebInfo, Static)'),
+(1,1750795623,0,0,'DestinyCore rev. world_db-3c10d2bf2d-dirty 2025-06-24 20:24:07 +0200 ( branch) (Win64, RelWithDebInfo, Static)');
 
 UNLOCK TABLES;
 

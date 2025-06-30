@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -17,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _WORLDDATABASE_H
-#define _WORLDDATABASE_H
+#ifndef WORLDDATABASE_H
+#define WORLDDATABASE_H
 
 #include "DatabaseWorkerPool.h"
 #include "MySQLConnection.h"
@@ -116,6 +114,9 @@ enum WorldDatabaseStatements
     WORLD_SEL_BLACKMARKET_TEMPLATE,
     WORLD_UPD_CREATURE_ZONE_AREA_DATA,
     WORLD_UPD_GAMEOBJECT_ZONE_AREA_DATA,
+
+    WORLD_SEL_APPLIED_UPDATE,
+    WORLD_INS_APPLIED_UPDATE,
 
     MAX_WORLDDATABASE_STATEMENTS
 };

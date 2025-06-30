@@ -1,11 +1,9 @@
 /*
- * Copyright (C) 2011-2016 Project SkyFire <http://www.projectskyfire.org/>
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2005-2016 MaNGOS <http://getmangos.com/>
+ * This file is part of the DestinyCore Project. See AUTHORS file for Copyright information
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 3 of the License, or (at your
+ * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
@@ -99,4 +97,8 @@ void WorldDatabaseConnection::DoPrepareStatements()
 
     PrepareStatement(WORLD_UPD_CREATURE_ZONE_AREA_DATA, "UPDATE creature SET zoneId = ?, areaId = ? WHERE guid = ?", CONNECTION_ASYNC);
     PrepareStatement(WORLD_UPD_GAMEOBJECT_ZONE_AREA_DATA, "UPDATE gameobject SET zoneId = ?, areaId = ? WHERE guid = ?", CONNECTION_ASYNC);
+
+    // DatabaseUpdater
+    PrepareStatement(WORLD_SEL_APPLIED_UPDATE, "SELECT 1 FROM applied_updates WHERE name = ? LIMIT 1", CONNECTION_SYNCH);
+    PrepareStatement(WORLD_INS_APPLIED_UPDATE, "INSERT INTO applied_updates (name, timestamp) VALUES (?, NOW())", CONNECTION_ASYNC);
 }
