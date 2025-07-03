@@ -1,1 +1,0 @@
-ALTER TABLE account ADD COLUMN test_column INT DEFAULT 0;
